@@ -1,0 +1,875 @@
+/* Modern Variables */
+:root {
+    --primary: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --bg-dark: #0f172a;
+    --bg-darker: #070b14;
+    --text: #e2e8f0;
+    --success: #10b981;
+    --error: #ef4444;
+    --glow: 0 0 20px rgba(59, 130, 246, 0.5);
+    --gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background: var(--bg-dark);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+    overflow: hidden;
+}
+
+/* Animated Background */
+.chat-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: 
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.1) 0%, transparent 30%),
+        radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.1) 0%, transparent 30%),
+        var(--bg-darker);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Floating Particles */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 50%;
+    filter: blur(1px);
+    pointer-events: none;
+}
+
+.particle:nth-child(odd) {
+    background: linear-gradient(90deg, var(--primary), transparent);
+}
+
+.particle:nth-child(even) {
+    background: linear-gradient(90deg, #8b5cf6, transparent);
+}
+
+/* Add glowing orbs in the background */
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    pointer-events: none;
+    animation: orbFloat 20s infinite alternate;
+}
+
+.orb-1 {
+    width: 300px;
+    height: 300px;
+    background: var(--primary);
+    top: -150px;
+    left: -150px;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: #8b5cf6;
+    bottom: -200px;
+    right: -200px;
+}
+
+/* Modern Header */
+.chat-header {
+    padding: 1.5rem 2rem;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 10;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.chat-header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    color: var(--success);
+}
+
+.status-indicator::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--success);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+}
+
+/* Social Links */
+.header-right {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.social-link {
+    width: 45px;
+    height: 45px;
+    min-width: 45px;
+    border-radius: 12px;
+    border: none;
+    background: var(--gradient);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(59, 130, 246, 0.3);
+}
+
+.social-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.social-link:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+}
+
+.social-link i {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.social-link:hover i {
+    transform: translateY(-2px);
+}
+
+/* Button Gradient Animation */
+.social-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2)
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.social-link:hover::before {
+    transform: translateX(0);
+}
+
+/* Existing animations */
+@keyframes pulse {
+    0% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+    
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+    }
+    
+    100% {
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+    }
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.5),
+                     0 0 20px rgba(59, 130, 246, 0.3),
+                     0 0 30px rgba(59, 130, 246, 0.1);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(59, 130, 246, 0.8),
+                     0 0 40px rgba(59, 130, 246, 0.5),
+                     0 0 60px rgba(59, 130, 246, 0.2);
+    }
+}
+
+/* Messages Container */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    scroll-behavior: smooth;
+    position: relative;
+}
+
+/* Modern Scrollbar */
+.chat-messages::-webkit-scrollbar {
+    width: 5px;
+}
+
+.chat-messages::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.chat-messages::-webkit-scrollbar-thumb {
+    background: var(--gradient);
+    border-radius: 5px;
+}
+
+/* Enhanced Message Bubbles */
+.message {
+    padding: 1.25rem;
+    border-radius: 1rem;
+    max-width: 85%;
+    width: fit-content;
+    line-height: 1.6;
+    animation: messageAppear 0.3s ease-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.ai-message {
+    background: rgba(255, 255, 255, 0.07);
+    margin-right: auto;
+    border-bottom-left-radius: 0.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.user-message {
+    background: var(--gradient);
+    margin-left: auto;
+    border-bottom-right-radius: 0.5rem;
+    color: white;
+}
+
+.message:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.message-wrapper {
+    width: 100%;
+    display: flex;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+}
+
+.message-wrapper.user {
+    justify-content: flex-end;
+}
+
+.message-wrapper.ai {
+    justify-content: flex-start;
+}
+
+/* Modern Input Container */
+.chat-input-container {
+    padding: 1.5rem;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 4rem);
+    max-width: 1200px;
+    border-radius: 20px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+/* Adjust messages container to accommodate floating input */
+.chat-messages {
+    padding-bottom: calc(6rem + 50px) !important;
+}
+
+/* Glass effect for input container */
+.chat-input-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.02) 100%
+    );
+    pointer-events: none;
+}
+
+/* Optional: Add hover effect to the container */
+.chat-input-container:hover {
+    transform: translateX(-50%) translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+/* Enhanced Input Field */
+#user-input {
+    flex: 1;
+    min-height: 50px;
+    padding: 0.8rem 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-size: 1rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+#user-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+#user-input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+}
+
+/* Enhanced Send Button */
+.send-btn {
+    width: 50px;
+    height: 50px;
+    min-width: 50px;
+    border-radius: 12px;
+    border: none;
+    background: var(--gradient);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 15px rgba(59, 130, 246, 0.3);
+}
+
+.send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.send-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+}
+
+.send-btn i {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 2;
+    transition: transform 0.3s ease;
+}
+
+.send-btn:hover i {
+    transform: translateX(2px);
+}
+
+/* Button Gradient Animation */
+.send-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.2)
+    );
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.send-btn:hover::before {
+    transform: translateX(0);
+}
+
+/* Input Focus State Animation */
+@keyframes inputFocus {
+    0% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+    }
+}
+
+#user-input:focus {
+    animation: inputFocus 2s ease-in-out infinite;
+}
+
+/* Icon sizing */
+.control-btn i, .send-btn i {
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 2;
+}
+
+/* Input field */
+#user-input {
+    flex: 1;
+    height: 45px;
+    padding: 0 1.25rem;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#user-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+}
+
+/* Button hover effects */
+.control-btn:hover, .send-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+}
+
+.header-controls .control-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.control-btn:active, .send-btn:active {
+    transform: translateY(0);
+}
+
+/* Button gradient hover effect */
+.control-btn::after, .send-btn::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0.2), transparent);
+    top: -100%;
+    left: 0;
+    transition: 0.3s ease;
+}
+
+.control-btn:hover::after, .send-btn:hover::after {
+    top: 0;
+}
+
+/* File input styling */
+#file-input {
+    display: none;
+}
+
+/* Make sure icons are centered */
+.control-btn i, .send-btn i {
+    position: relative;
+    z-index: 2;
+}
+
+/* Image Preview Enhancement */
+.image-preview {
+    margin: 1rem 0;
+    max-width: 300px;
+    border-radius: 1rem;
+    overflow: hidden;
+    position: relative;
+}
+
+.image-preview::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient);
+    opacity: 0;
+    transition: 0.3s ease;
+}
+
+.image-preview:hover::before {
+    opacity: 0.2;
+}
+
+.image-preview img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.image-preview:hover img {
+    transform: scale(1.05);
+}
+
+/* Advanced Animations */
+@keyframes messageAppear {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes orbFloat {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(50px, 50px) scale(1.1);
+    }
+    100% {
+        transform: translate(-50px, -50px) scale(0.9);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-1000px) translateX(100px) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* Loading Animation */
+.typing-indicator {
+    display: flex;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    width: fit-content;
+}
+
+.typing-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--primary);
+    border-radius: 50%;
+    animation: typingBounce 0.5s infinite alternate;
+}
+
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typingBounce {
+    to {
+        transform: translateY(-4px);
+        opacity: 0.5;
+    }
+}
+
+/* Voice Recording Styles */
+.recording {
+    background: var(--error) !important;
+    animation: pulse 1.5s infinite !important;
+}
+
+.recording-input {
+    border-color: var(--error) !important;
+    animation: inputPulse 1.5s infinite !important;
+}
+
+.recording-indicator {
+    position: absolute;
+    right: 160px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.recording-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--error);
+    border-radius: 50%;
+    animation: recordingPulse 1s infinite;
+}
+
+/* Voice button tooltip */
+#voice-btn::before {
+    content: 'Press Alt+V for voice input';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px 10px;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    margin-bottom: 5px;
+}
+
+#voice-btn:hover::before {
+    opacity: 1;
+}
+
+/* Recording state styles */
+.recording-input {
+    border-color: var(--error) !important;
+    animation: inputPulse 1.5s infinite;
+}
+
+@keyframes inputPulse {
+    0% {
+        border-color: rgba(239, 68, 68, 0.5);
+    }
+    50% {
+        border-color: rgba(239, 68, 68, 1);
+    }
+    100% {
+        border-color: rgba(239, 68, 68, 0.5);
+    }
+}
+
+/* Code block styling */
+.code-block-container {
+    background: #1e1e1e;
+    border-radius: 8px;
+    margin: 1rem 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.code-block-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 16px;
+    background: #2d2d2d;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.language-label {
+    color: #989898;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+}
+
+.copy-button {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #989898;
+    padding: 4px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.code-block {
+    margin: 0 !important;
+    padding: 16px !important;
+    background: #1e1e1e !important;
+    overflow-x: auto;
+}
+
+.code-block code {
+    font-family: 'Fira Code', monospace !important;
+    font-size: 14px !important;
+    line-height: 1.6 !important;
+    color: #d4d4d4 !important;
+}
+
+/* Syntax highlighting */
+.token.comment { color: #6a9955 !important; }
+.token.keyword { color: #569cd6 !important; }
+.token.string { color: #ce9178 !important; }
+.token.function { color: #dcdcaa !important; }
+.token.number { color: #b5cea8 !important; }
+.token.operator { color: #d4d4d4 !important; }
+
+/* Message styling */
+.message p {
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.2px;
+}
+
+.message p:last-child {
+    margin-bottom: 0;
+}
+
+.message strong {
+    color: #fff;
+    font-weight: 600;
+}
+
+/* List Styling in Messages */
+.message ul, .message ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+}
+
+.message li {
+    margin-bottom: 0.5rem;
+    position: relative;
+}
+
+.message ul li::before {
+    content: '•';
+    color: var(--primary);
+    font-weight: bold;
+    position: absolute;
+    left: -1.1rem;
+}
+
+/* Code Inline Styling */
+.message code:not(.code-block code) {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.2em 0.4em;
+    border-radius: 0.3rem;
+    font-size: 0.9em;
+    font-family: 'Fira Code', monospace;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Links in Messages */
+.message a {
+    color: var(--primary);
+    text-decoration: none;
+    border-bottom: 1px dashed var(--primary);
+    transition: all 0.2s ease;
+}
+
+.message a:hover {
+    border-bottom-style: solid;
+    opacity: 0.8;
+}
+
+/* Blockquote Styling */
+.message blockquote {
+    border-left: 3px solid var(--primary);
+    margin: 1rem 0;
+    padding: 0.5rem 0 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+/* Code block spacing */
+.code-block-container {
+    margin: 1rem 0;
+}
+
+/* Example section */
+.message .example {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 0.5rem;
+    border-left: 3px solid var(--primary);
+}
+
+.message .example-title {
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+}
