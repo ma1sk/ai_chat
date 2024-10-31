@@ -144,4 +144,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-Project Link: [https://github.com/ma1sk/ai-chat-interface](https://github.com/ma1sk/ai-chat-interface)
+Project Link: [https://github.com/ma1sk/ai-chat-interface](https://github.com/ma1sk/ai_chat)
